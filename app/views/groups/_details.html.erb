@@ -15,9 +15,26 @@
         <td><%= group.name %></td>
         <td><%= group.introduction %></td>
         <td>
+          <ul>
+            <% group.users.each do |user| %>
+              <li><%= user.name %></li>
+            <% end %>
+          </ul>
+        </td>
+        <td>
           <% if group.is_owned_by?(current_user) %>
             <%= link_to edit_group_path(group), class: "btn btn-outline-primary btn-sm btn-block" do %>
               <i class="fa-solid fa-pencil"></i> Edit
+            <% end %>
+          <% else %>
+            <% if group.include_user?(current_user) %>
+              <%= link_to group_group_users_path(group), method: :delete, class: "btn btn-danger btn-sm" do %>
+                Leave this group
+              <% end %>
+            <% else %>
+              <%= link_to group_group_users_path(group), method: :post, class: "btn btn-success btn-sm" do %>
+                Join this group
+              <% end %>
             <% end %>
           <% end %>
         </td>
