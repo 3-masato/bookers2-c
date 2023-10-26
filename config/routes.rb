@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root :to => "homes#top"
   get "home/about" => "homes#about"
+  get "/search", to: "searches#search"
 
   resources :books, only: [:index, :show, :edit, :create, :destroy, :update] do
     resource :favorites, only: [:create, :destroy]
@@ -15,5 +16,5 @@ Rails.application.routes.draw do
       get "followers" => "relationships#followers", as: "followers"
   end
 
-  get "/search", to: "searches#search"
+  resources :groups, only: [:new, :index, :show, :edit, :create, :update]
 end

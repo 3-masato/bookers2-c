@@ -1,0 +1,4 @@
+<%= render "layouts/errors", model: @group %>
+<%= render "parts/frame", type: :middle do %>
+  <%= render "groups/form", group: @group, heading: "New Group", action: :create %>
+<% end %>
