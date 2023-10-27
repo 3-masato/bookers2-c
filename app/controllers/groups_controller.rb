@@ -7,16 +7,17 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @group = Group.includes(:users).find(params[:id])
     @user = current_user
-    @group = Group.find(params[:id])
   end
 
   def index
-    @user = current_user
     @groups = Group.all
+    @user = current_user
   end
 
   def edit
+    @group = Group.find(params[:id])
   end
 
   def create
@@ -24,15 +25,16 @@ class GroupsController < ApplicationController
     @group.owner_id = current_user.id
     if @group.save
       @group.group_users.create(user: current_user)
-      redirect_to groups_path
+      redirect_to groups_path, notice: "You have created group successfully."
     else
       render :new
     end
   end
 
   def update
+    @group = Group.find(params[:id])
     if @group.update(group_params)
-      redirect_to groups_path
+      redirect_to groups_path, notice: "You have updated group successfully."
     else
       render :edit
     end

@@ -1,6 +1,8 @@
 <section class="mb-4">
   <h2><%= heading ||= "Users" %></h2>
-  <%= link_to "Create group", new_group_path %>｜<%= link_to "Groups List", groups_path %>
+  <div class="my-2">
+    <%= link_to "Create group", new_group_path %>｜<%= link_to "Groups List", groups_path %>
+  </div>
   <div class="table-responsive">
     <table class='table'>
       <thead>

@@ -1,0 +1,61 @@
+.group-details {
+  display: grid;
+  gap: 8px;
+  grid-template: "icon body action" "user user user" / 96px 1fr 6rem;
+
+  &-icon {
+    grid-area: icon;
+  }
+
+  &-body {
+    grid-area: body;
+  }
+
+  &-content {
+    display: block;
+  }
+
+  &-name {
+    white-space: break-spaces;
+    line-break: anywhere;
+  }
+
+  &-introduction {
+    white-space: break-spaces;
+    line-break: anywhere;
+  }
+
+  &-action {
+    grid-area: action;
+    justify-self: center;
+  }
+
+  &-user {
+    grid-area: user;
+
+    &-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+    }
+
+    &-item {
+      display: grid;
+      gap: 8px;
+      grid-template: "icon name" / 32px 1fr;
+    }
+
+    &-icon {
+      grid-area: icon;
+    }
+
+    &-name {
+      grid-area: name;
+    }
+  }
+}
+
+
