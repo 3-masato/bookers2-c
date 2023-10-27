@@ -1,0 +1,19 @@
+<%= render "layouts/errors", model: @group %>
+<%= render "parts/frame", type: :middle do %>
+  <h2>Event Mail</h2>
+  <%= form_with url: group_send_mail_path(@group), method: :get, local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :title, class: "font-weight-bold" %>
+      <%= f.text_field :mail_title, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :content, class: "font-weight-bold" %>
+      <%= f.text_area :mail_content, class:"form-control", rows: "3" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Send", class: "btn btn-sm btn-success" %>
+    </div>
+  <% end %>
+<% end %>

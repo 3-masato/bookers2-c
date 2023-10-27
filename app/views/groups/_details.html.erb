@@ -17,12 +17,15 @@
           <%= link_to edit_group_path(group), class: "btn btn-outline-primary btn-sm btn-block" do %>
             <i class="fa-solid fa-pencil"></i> Edit
           <% end %>
+          <%= link_to group_new_mail_path(group), class: "btn btn-outline-info btn-sm btn-block" do %>
+            Notice an Event
+          <% end %>
         <% elsif group.include_user?(current_user) %>
-          <%= link_to group_group_users_path(group), method: :delete, class: "btn btn-outline-danger btn-sm" do %>
+          <%= link_to group_group_users_path(group), method: :delete, "data-confirm" => "Are you sure?", class: "btn btn-outline-danger btn-sm btn-block" do %>
             Leave
           <% end %>
         <% else %>
-          <%= link_to group_group_users_path(group), method: :post, class: "btn btn-outline-success btn-sm" do %>
+          <%= link_to group_group_users_path(group), method: :post, class: "btn btn-outline-success btn-sm btn-block" do %>
             Join
           <% end %>
         <% end %>
@@ -31,11 +34,14 @@
         <h3>Group users</h3>
         <ul class="group-details-user-list">
           <% group.users.each do |user| %>
-            <li class="group-details-user-item">
+            <% is_owner = user.id == group.owner_id %>
+            <li class="group-details-user-item" <%= "data-group-role=owner" if is_owner %>>
               <div class="group-details-user-icon">
                 <%= image_tag user.get_profile_image, size:"32x32" %>
               </div>
-              <div class="group-details-user-name"><%= link_to user.name, user_path(user) %></div>
+              <div class="group-details-user-name">
+                <%= link_to user.name, user_path(user) %>
+              </div>
             </li>
           <% end %>
         </ul>
